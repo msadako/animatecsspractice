@@ -1,0 +1,28 @@
+.my-element {
+  display: inline-block;
+
+  animation: bounce; /* referring directly to the animation's @keyframe declaration */
+  animation-duration: 5s; /* don't forget to set a duration! */
+}
+
+p{
+  margin-top: 300px;
+}
+
+/* This only changes this particular animation duration */
+.animate__animated.animate__bounce {
+  --animate-duration: 1.5s;
+}
+
+/* This changes all the animations globaly */
+:root {
+  --animate-duration: 800ms;
+  --animate-delay: 3s;
+}
+
+.anim{
+  opacity: 0;
+}
+.anim.anim-active{
+  opacity: 1;
+}

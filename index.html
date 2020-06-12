@@ -4,13 +4,90 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="destyle.css">
+  <link rel="stylesheet" href="animate.css">
+  <link rel="stylesheet" href="style.css">
   <title>Document</title>
 </head>
 <body>
 
   <main>
     <h1>animate.cssの練習</h1>
+    <a href="https://animate.style/">https://animate.style/　ここですきな動き見つける</a><br>
+    <a href="https://qiita.com/kouh/items/dfc14d25ccb4e50afe89">　jsのこと</a>
+    <p>すきな、動きのcssに .anim-activeをつける。</p>
+    <pre>
+      .animate__fadeInUp.anim-active {
+        -webkit-animation-name: fadeInUp;
+        animation-name: fadeInUp;
+      }
+    </pre>
+
+
+    
+    <p class="anim animate__animated animate__bounce">animate__bounce cssに100%_opacity:1 を加えるといい感じ</p>
+    <p class="animate__animated animate__swing">animate__swing</p>
+    <p class="animate__animated animate__shakeY">animate__shakeY</p>
+    <p class="anim animate__animated animate__fadeInUp">animate__fadeIn1</p>
+    <p class="anim animate__animated animate__fadeInUp">animate__fadeIn2</p>
+    <p class="anim animate__animated animate__fadeInUp">animate__fadeIn3</p>
+    <p class="my-element animate__animated animate__bounce">animate__bounce</p>
+    
+
+    <h2>anim-active をつけると発火</h2>
+    <p class="anim animate__animated animate__fadeInUp">animate__fadeIn2</p>
+    <button class="btn">onclick</button>
+
   </main>
+
+  <script>
+
+    let targetAnims = document.getElementsByClassName("anim");
+
+    window.addEventListener( "scroll", function () {
+      // scrollAnim();
+      var scroll = window.pageYOffset; //スクロール量
+      var wHeight = window.innerHeight; //windowの高さ
+      for(let i = 0; i < targetAnims.length; i++){
+          //console.log(targetAnims[i])
+          // console.log(scroll)
+
+          //var position = targetAnims[i].offset().top;
+          //.offset().topをjsのみで書くとこうなる
+          var rect = targetAnims[i].getBoundingClientRect();
+          var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+          var position = rect.top + scrollTop;
+
+          var margin = wHeight - 100;
+
+          if (scroll > position - margin){
+            targetAnims[i].classList.add('anim-active');
+          } else {
+            targetAnims[i].classList.remove('anim-active');
+          }
+      }
+
+    });
+
+
+
+    
+
+    let targetBtns = document.getElementsByClassName("btn");
+    for(let i = 0; i < targetBtns.length; i++){
+      targetBtns[i].addEventListener("click", function sayGoodbye(){
+          // alert("Bye!");
+          //直前の要素を取得して .animate__animated を追加する
+          let target = this.previousElementSibling;
+          console.log(target)
+          //target.classList.add('animate__animated','animate__fadeInUp');
+          target.classList.add('anim-active');
+      }, false);
+    }
+
+
+  </script>
+
+
   
 </body>
 </html>
